@@ -18,6 +18,9 @@
   padding: 10px;
   color: rgb(246, 251, 255);
 }
+.container form, .container input, .container .buttons button {
+  border-radius: 5px;
+}
 .container form {
   display: flex;
   flex-direction: column;
@@ -25,16 +28,14 @@
   align-items: center;
   margin: calc((100vh - 181px) * 0.2) auto;
   width: 500px;
-  border-radius: 3px;
   box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
   height: calc((100vh - 181px) * 0.6);
 }
 .container form input, .container form .buttons button {
   font-size: 35px;
+  padding: 5px 10px;
 }
 .container form input {
-  border-radius: 5px;
-  padding: 5px 10px;
   outline: none;
   border: 2px solid rgb(19, 166, 240);
 }
@@ -43,7 +44,5 @@
   color: rgb(246, 251, 255);
   cursor: pointer;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
   margin-inline: 5px;
 }/*# sourceMappingURL=style.css.map */
