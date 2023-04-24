@@ -179,9 +179,6 @@ body{
                 outline: none;
                 border: none;
                 border-radius: 0;
-                &:disabled{
-                    background-color: transparent;
-                }
                 &:focus{
                     border-block-end: 2px solid rgb(19, 166, 240);
                 }

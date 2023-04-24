@@ -195,9 +195,6 @@ body .container .management .card input {
   border: none;
   border-radius: 0;
 }
-body .container .management .card input:disabled {
-  background-color: transparent;
-}
 body .container .management .card input:focus {
   -webkit-border-after: 2px solid rgb(19, 166, 240);
           border-block-end: 2px solid rgb(19, 166, 240);
