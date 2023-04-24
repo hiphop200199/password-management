@@ -64,6 +64,19 @@ body{
             padding: 10px;
             color: rgb(246, 251, 255);
         }
+        & .logout{
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 30px;
+            font-weight: 700;
+            color: rgb(246, 251, 255);
+            background-color: transparent;
+            border: none;
+            border-block-end: 2px solid rgb(246, 251, 255);
+            cursor: pointer;
+        }
         & form,& input,& .buttons button{
             border-radius: 5px;
         }
@@ -72,6 +85,7 @@ body{
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
+            //display: none;
             margin:calc((100vh - 181px)*0.2) auto;
             width: 500px;
             box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
@@ -94,7 +108,50 @@ body{
                 }
             }
         }
-       
+       & .management{
+           display: none;
+           margin: 0 auto;
+           width: 60%;
+           padding: 10px;
+           flex-wrap: wrap;
+           justify-content: center;
+           align-items: center;
+        & .card{
+            width: 290px;
+            height: fit-content;
+            border-radius: 5px;
+            box-shadow: 1px 1px 3px 1px rgb(19, 166, 240);
+            padding: 5px;
+            margin: 20px;
+            & .service{
+                font-size: 30px;
+                margin-block: 5px;
+            }
+            & label{
+                font-size: 16px;
+                margin-inline-end: 5px;
+            }
+            & input{
+                font-size: 16px;
+                outline: none;
+                border: none;
+                border-radius: 0;
+                &:disabled{
+                    background-color: transparent;
+                }
+            }
+            & button{
+                margin-block: 5px;
+                font-size: 20px;
+                background-color: rgb(19, 166, 240);
+                padding: 2px 5px;
+                border-radius: 2px;
+                color: rgb(246, 251, 255);
+                cursor: pointer;
+                border: none;
+            }
+        }
+       }
     }
 }
 
