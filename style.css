@@ -48,6 +48,12 @@ body dialog #sign-up-form input {
           margin-inline-start: 10px;
   width: 90%;
 }
+body dialog #sign-up-form .error-message {
+  color: rgb(240, 45, 19);
+  font-size: 16px;
+  -webkit-margin-start: 10px;
+          margin-inline-start: 10px;
+}
 body dialog #sign-up-form button {
   background-color: rgb(19, 166, 240);
   color: rgb(246, 251, 255);
