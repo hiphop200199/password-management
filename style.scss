@@ -52,11 +52,41 @@ body{
                 cursor: pointer;
             }
         }
+        & #add-form{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            & label{
+                font-size: 30px;
+                margin-inline-start: 10px;
+            }
+            & input{
+                font-size: 30px;
+                padding: 5px;
+                border: none;
+                border-block-end: 1px solid rgb(19, 166, 240);
+                outline: none;
+                margin-block:15px;
+                margin-inline-start: 10px;
+                width: 90%;
+            }
+            & button{
+                background-color: rgb(19, 166, 240);
+                color: rgb(246, 251, 255);
+                border: none;
+                padding: 5px;
+                border-radius: 3px;
+                font-size: 30px;
+                margin-block: 10px;
+                margin-inline-start: 10px;
+                cursor: pointer;
+            }
+        }
     }
     .container{
         min-height: 100vh;
         overflow: hidden;
-        & .title{
+        & .header-text{
             text-align: center;
             font-size: 120px;
             font-weight: 700;
@@ -69,7 +99,20 @@ body{
             position: absolute;
             right: 10px;
             top: 5px;
-            font-size: 30px;
+            font-size: 40px;
+            font-weight: 700;
+            color: rgb(246, 251, 255);
+            background-color: transparent;
+            border: none;
+            border-block-end: 2px solid rgb(246, 251, 255);
+            cursor: pointer;
+        }
+        & .add-new-card{
+            display: none;
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            font-size: 40px;
             font-weight: 700;
             color: rgb(246, 251, 255);
             background-color: transparent;
@@ -128,20 +171,24 @@ body{
                 margin-block: 5px;
             }
             & label{
-                font-size: 16px;
+                font-size: 18px;
                 margin-inline-end: 5px;
             }
             & input{
-                font-size: 16px;
+                font-size: 18px;
                 outline: none;
                 border: none;
                 border-radius: 0;
                 &:disabled{
                     background-color: transparent;
                 }
+                &:focus{
+                    border-block-end: 2px solid rgb(19, 166, 240);
+                }
             }
             & button{
                 margin-block: 5px;
+                margin-inline-end: 5px;
                 font-size: 20px;
                 background-color: rgb(19, 166, 240);
                 padding: 2px 5px;
@@ -149,6 +196,10 @@ body{
                 color: rgb(246, 251, 255);
                 cursor: pointer;
                 border: none;
+            }
+            & [data-type=ok]{
+                display: none;
+                text-align: end;
             }
         }
        }

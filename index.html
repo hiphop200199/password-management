@@ -14,36 +14,58 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="title">Woopass</h1>
-      <button class="logout">logout</button>
+      <h1 class="header-text">Woopass</h1>
+      <button class="logout">Logout</button>
+      <button class="add-new-card">Add</button>
       <form id="login-form">
-        <input type="email" placeholder="account" id="login-account" />
-        <input type="password" placeholder="password" id="login-password" />
+        <input type="email" placeholder="account" id="login-account" required />
+        <input
+          type="password"
+          placeholder="password"
+          id="login-password"
+          required
+        />
         <section class="buttons">
           <button type="button" id="sign-btn">Sign</button>
-          <button type="button" id="login-btn">Login</button>
+          <button type="submit" id="login-btn">Login</button>
         </section>
       </form>
       <div class="management">
         <div class="card">
           <h2 class="service">zoogle</h2>
-          <label for=""
-            >account:<input type="text" class="account" disabled value="fdsrgf"
+          <label
+            >account:<input
+              type="text"
+              disabled
+              onblur="this.setAttribute('disabled','true')"
           /></label>
-          <label for=""
-            >password:<input type="password" class="password" disabled
+          <label
+            >password:<input
+              type="password"
+              disabled
+              onblur="this.setAttribute('disabled','true')"
           /></label>
-          <button class="edit">edit</button>
-          <button class="delete">delete</button>
+          <button data-type="ok">Ok!</button>
+          <button data-type="edit">Edit</button>
+          <button data-type="delete">Delete</button>
         </div>
       </div>
     </div>
-    <dialog>
+    <dialog class="sign-up-modal">
       <h1 class="modal-title">Sign up</h1>
       <form id="sign-up-form">
         <input type="email" placeholder="account" id="sign-account" />
         <input type="password" placeholder="password" id="sign-password" />
         <button type="submit">Sign up</button>
+      </form>
+    </dialog>
+    <dialog class="add-new-card-modal">
+      <form method="dialog" id="add-form">
+        <label for="">service:</label><input type="text" id="new-service" />
+        <label for="">account:</label><input type="text" id="new-account" />
+        <label for="">password:</label
+        ><input type="password" id="new-password" />
+        <button type="submit">submit</button>
       </form>
     </dialog>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
