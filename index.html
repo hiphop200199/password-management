@@ -24,5 +24,23 @@
         </section>
       </form>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDBPQEAmGEIQAmVvTHDt_dWp8jBW6CbWXE",
+        authDomain: "password-management-c7bef.firebaseapp.com",
+        projectId: "password-management-c7bef",
+        storageBucket: "password-management-c7bef.appspot.com",
+        messagingSenderId: "93903775875",
+        appId: "1:93903775875:web:afbaae46fdc14c892053b6",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
   </body>
 </html>
