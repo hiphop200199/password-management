@@ -6,11 +6,65 @@
   font-family: "Ysabeau", sans-serif;
 }
 
-.container {
+body {
+  position: relative;
+}
+body dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: none;
+  box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
+  animation: show 0.5s linear forwards;
+}
+body dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+body dialog .modal-title {
+  font-size: 40px;
+  -webkit-margin-start: 10px;
+          margin-inline-start: 10px;
+  -webkit-margin-after: 15px;
+          margin-block-end: 15px;
+}
+body dialog #sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body dialog #sign-up-form input {
+  font-size: 30px;
+  padding: 5px;
+  border: none;
+  -webkit-border-after: 1px solid rgb(19, 166, 240);
+          border-block-end: 1px solid rgb(19, 166, 240);
+  outline: none;
+  margin-block: 15px;
+  -webkit-margin-start: 10px;
+          margin-inline-start: 10px;
+  width: 90%;
+}
+body dialog #sign-up-form button {
+  background-color: rgb(19, 166, 240);
+  color: rgb(246, 251, 255);
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 30px;
+  margin-block: 10px;
+  -webkit-margin-start: 10px;
+          margin-inline-start: 10px;
+  cursor: pointer;
+}
+body .container {
   min-height: 100vh;
   overflow: hidden;
 }
-.container .title {
+body .container .title {
   text-align: center;
   font-size: 120px;
   font-weight: 700;
@@ -18,10 +72,10 @@
   padding: 10px;
   color: rgb(246, 251, 255);
 }
-.container form, .container input, .container .buttons button {
+body .container form, body .container input, body .container .buttons button {
   border-radius: 5px;
 }
-.container form {
+body .container form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -31,18 +85,27 @@
   box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
   height: calc((100vh - 181px) * 0.6);
 }
-.container form input, .container form .buttons button {
+body .container form input, body .container form .buttons button {
   font-size: 35px;
   padding: 5px 10px;
 }
-.container form input {
+body .container form input {
   outline: none;
   border: 2px solid rgb(19, 166, 240);
 }
-.container form .buttons button {
+body .container form .buttons button {
   background-color: rgb(19, 166, 240);
   color: rgb(246, 251, 255);
   cursor: pointer;
   border: none;
   margin-inline: 5px;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }/*# sourceMappingURL=style.css.map */

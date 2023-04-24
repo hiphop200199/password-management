@@ -5,45 +5,100 @@
     box-sizing: border-box;
     font-family: 'Ysabeau', sans-serif;
 }
-.container{
-    min-height: 100vh;
-    overflow: hidden;
-    & .title{
-        text-align: center;
-        font-size: 120px;
-        font-weight: 700;
-       background-color: rgb(19, 166, 240);
-        padding: 10px;
-        color: rgb(246, 251, 255);
-    }
-    & form,& input,& .buttons button{
-        border-radius: 5px;
-    }
-    & form{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin:calc((100vh - 181px)*0.2) auto;
-        width: 500px;
-        box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
-        height: calc((100vh - 181px)*0.6);
-        & input,& .buttons button{
-            font-size: 35px;
-            padding: 5px 10px;
+
+body{
+    position: relative;
+  & dialog{
+       position: absolute;
+      left: 50%;
+      top: 50%;
+       transform: translate(-50%,-50%);
+       width: 700px;
+       height: fit-content;
+       border: none;
+       box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
+       animation: show 0.5s linear forwards;
+       &::backdrop{
+       background-color: rgba(0,0,0,0.6);
+       }
+        & .modal-title{
+            font-size: 40px;
+            margin-inline-start: 10px;
+            margin-block-end: 15px;
         }
-        & input{
-            outline: none;
-            border: 2px solid rgb(19, 166, 240);
-        }
-        & .buttons{
+        & #sign-up-form{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            & input{
+                font-size: 30px;
+                padding: 5px;
+                border: none;
+                border-block-end: 1px solid rgb(19, 166, 240);
+                outline: none;
+                margin-block:15px;
+                margin-inline-start: 10px;
+                width: 90%;
+            }
             & button{
                 background-color: rgb(19, 166, 240);
                 color: rgb(246, 251, 255);
-                cursor: pointer;
                 border: none;
-                margin-inline: 5px;
+                padding: 5px;
+                border-radius: 3px;
+                font-size: 30px;
+                margin-block: 10px;
+                margin-inline-start: 10px;
+                cursor: pointer;
             }
         }
     }
+    .container{
+        min-height: 100vh;
+        overflow: hidden;
+        & .title{
+            text-align: center;
+            font-size: 120px;
+            font-weight: 700;
+           background-color: rgb(19, 166, 240);
+            padding: 10px;
+            color: rgb(246, 251, 255);
+        }
+        & form,& input,& .buttons button{
+            border-radius: 5px;
+        }
+        & form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            margin:calc((100vh - 181px)*0.2) auto;
+            width: 500px;
+            box-shadow: 2px 1px 5px 2px rgb(19, 166, 240);
+            height: calc((100vh - 181px)*0.6);
+            & input,& .buttons button{
+                font-size: 35px;
+                padding: 5px 10px;
+            }
+            & input{
+                outline: none;
+                border: 2px solid rgb(19, 166, 240);
+            }
+            & .buttons{
+                & button{
+                    background-color: rgb(19, 166, 240);
+                    color: rgb(246, 251, 255);
+                    cursor: pointer;
+                    border: none;
+                    margin-inline: 5px;
+                }
+            }
+        }
+       
+    }
+}
+
+@keyframes show {
+  from{opacity: 0;}
+  to{opacity: 1;}
 }

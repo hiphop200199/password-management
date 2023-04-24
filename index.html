@@ -9,21 +9,29 @@
     />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+
     <title>Password management</title>
   </head>
   <body>
     <div class="container">
       <h1 class="title">Woopass</h1>
-      <form>
-        <input type="email" placeholder="account" />
-        <input type="password" placeholder="password" />
+      <form id="login-form">
+        <input type="email" placeholder="account" id="login-account" />
+        <input type="password" placeholder="password" id="login-password" />
         <section class="buttons">
-          <button>Sign</button>
-          <button>Login</button>
+          <button type="button" id="sign-btn">Sign</button>
+          <button type="button" id="login-btn">Login</button>
         </section>
       </form>
     </div>
+    <dialog>
+      <h1 class="modal-title">Sign up</h1>
+      <form id="sign-up-form">
+        <input type="email" placeholder="account" id="sign-account" />
+        <input type="password" placeholder="password" id="sign-password" />
+        <button type="submit">Sign up</button>
+      </form>
+    </dialog>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -42,5 +50,7 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
     </script>
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
