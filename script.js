@@ -3,9 +3,16 @@ const addNewCardForm = document.getElementById("add-form");
 let dialog = document.querySelector(".sign-up-modal");
 
 
-signInBtn.addEventListener("click",()=>{
+signInBtn.addEventListener("click",()=>dialog.showModal)
+
+
+addNewCardBtn.addEventListener("click",e=>{
+    e.preventDefault();
+    let dialog = document.querySelector(".add-new-card-modal");
     dialog.showModal();
 })
+
+
 
 addNewCardForm.addEventListener("submit",e =>{
     e.preventDefault();
@@ -24,6 +31,7 @@ addNewCardForm.addEventListener("submit",e =>{
     let accountText =document.createTextNode('account:');
     let passwordText =document.createTextNode('password:');
     card.classList.add("card");
+    card.id=service;
     serviceName.classList.add("service");
     serviceName.innerText=service;
     accountValue.setAttribute("type","text");
@@ -36,38 +44,61 @@ addNewCardForm.addEventListener("submit",e =>{
     passwordLabel.append(passwordText,passwordValue);
     editBtn.innerText='Edit';
     editBtn.setAttribute("data-type","edit");
-    editBtn.onclick=()=>{
-        let account = editBtn.previousElementSibling.previousElementSibling.previousElementSibling.children[0];
-        let password = editBtn.previousElementSibling.previousElementSibling.children[0];
-        account.removeAttribute("disabled");
-        password.removeAttribute("disabled");
-        editBtn.style.display='none';
-        okBtn.style.display='inline';
-    }
+    editBtn.onclick=editCard(service);
     deleteBtn.innerText='Delete';
     deleteBtn.setAttribute("data-type","delete");
-    deleteBtn.onclick=()=>{
-        let card = deleteBtn.parentElement;
-        management.removeChild(card);
-    }
+    deleteBtn.onclick=deleteCard(service);
     okBtn.innerText='Ok!!';
     okBtn.setAttribute("data-type","ok");
-    okBtn.onclick=()=>{
-        let account = okBtn.previousElementSibling.previousElementSibling.children[0];
-        let password = okBtn.previousElementSibling.children[0];
-        account.setAttribute("disabled","true");
-        password.setAttribute("disabled","true");
-        okBtn.style.display='none';
-        editBtn.style.display='inline';
-    }
+    okBtn.onclick=ok(service);
     card.append(serviceName,accountLabel,passwordLabel,okBtn,editBtn,deleteBtn);
     management.append(card);
     addNewCardForm.reset();
     let dialog = document.querySelector(".add-new-card-modal");
     dialog.close();
+    db.collection("cards").doc(service).set({
+        service:service,
+        account:email,
+        password:password
+    });
 })
 
 
+function ok(cardId){
+    let account = management[`${cardId}`].children[1].children[0];
+    let password = management[`${cardId}`].children[2].children[0];
+        account.setAttribute("disabled","true");
+        password.setAttribute("disabled","true");
+        this.style.display='none';
+        this.nextElementSibling.style.display='inline';
+}
+function editCard(cardId){
+    let account = management[`${cardId}`].children[1].children[0];
+    let password = management[`${cardId}`].children[2].children[0];
+        account.removeAttribute("disabled");
+        password.removeAttribute("disabled");
+        this.style.display='none';
+        this.previousElementSibling.style.display='inline';
+}
 
+function deleteCard(cardId){
+    management.removeChild(management[`${cardId}`]);
+}
 
-
+function mapCardsToUI(data){
+    management.innerHTML=data.map(doc =>{
+        let {service,account,password} = doc.data();
+        return(`
+        
+        div class="card" id="${doc.id}">
+          <h2 class="service">${service}</h2>
+          <label>account:<input type="text" disabled value="${account}" /></label>
+          <label>password:<input type="password" disabled value="${password}" /></label>
+          <button data-type="ok" onclick="ok(${doc.id})">Ok!!</button>
+          <button data-type="edit" onclick="editCard(${doc.id})">Edit</button>
+          <button data-type="delete" onclick="deleteCard(${doc.id})">Delete</button>
+        </div>
+        
+        `)
+    }).join("")
+}

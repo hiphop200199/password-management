@@ -7,6 +7,11 @@ let management = document.querySelector(".management");
 let addNewCardBtn = document.querySelector(".add-new-card");
 let errorMessage= document.querySelector(".error-message");
 
+db.collection("cards").get().then(snapshot =>{
+   mapCardsToUI(snapshot.docs)
+})
+
+
 auth.onAuthStateChanged(user =>{
     console.log(user);
     if(user){
@@ -61,9 +66,5 @@ loginForm.addEventListener("submit",e =>{
      
 })
 
-addNewCardBtn.addEventListener("click",e=>{
-    e.preventDefault();
-    let dialog = document.querySelector(".add-new-card-modal");
-    dialog.showModal();
-})
+
 
