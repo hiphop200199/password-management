@@ -1,5 +1,4 @@
 const signInBtn = document.getElementById("sign-btn");
-const addNewCardForm = document.getElementById("add-form");
 let dialog = document.querySelector(".sign-up-modal");
 
 

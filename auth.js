@@ -14,11 +14,12 @@ auth.onAuthStateChanged(user =>{
     console.log(user);
     if(user){
         //用onSnapshot即時監聽資料庫變化
-        db.collection("users").doc(user.uid).collection("cards").onSnapshot(snapshot =>{
+        
+        db.collection("users").doc(`${user.uid}`).collection("cards").onSnapshot(snapshot =>{
             mapCardsToUI(snapshot.docs)
             let okBtns = document.querySelectorAll("[data-type=ok]");
             let deleteBtns = document.querySelectorAll("[data-type=delete]");
-            
+            let addNewCardForm = document.getElementById("add-form");
             for(let i=0;i<okBtns.length;i++){
                 okBtns[i].onclick=function(){
                     let account = okBtns[i].parentElement.children[1].children[0];
@@ -47,9 +48,22 @@ auth.onAuthStateChanged(user =>{
 
                
             } 
+            addNewCardForm.onsubmit=function(e){
+                e.preventDefault();
+                const service = addNewCardForm["new-service"].value;
+                const email = addNewCardForm["new-account"].value;
+                const password = addNewCardForm["new-password"].value;
+                db.collection("users").doc(`${user.uid}`).collection("cards").doc(`${service}`).set({
+                    service:service,
+                    account:email,
+                    password:password
+                }).then(()=>{
+                    addNewCardForm.reset();
+                    let dialog = document.querySelector(".add-new-card-modal");
+                    dialog.close();
+                })
+            }    
          })
-          
-        
         let userName =user.email.match(/.+(?=@)/i);
         loginForm.reset();
         loginForm.style.display="none";
@@ -57,57 +71,7 @@ auth.onAuthStateChanged(user =>{
         management.style.display='flex';
         addNewCardBtn.style.display='inline';
         headerText.innerText=`Welcome ${userName}!`;
-        headerText.style.fontSize='60px';
-        
-        addNewCardForm.addEventListener("submit",e =>{
-            e.preventDefault();
-            console.log(user.uid);
-            const service = addNewCardForm["new-service"].value;
-            const email = addNewCardForm["new-account"].value;
-            const password = addNewCardForm["new-password"].value;
-            /*let card = document.createElement("div");
-            let serviceName = document.createElement("h2");
-            let accountLabel = document.createElement("label");
-            let passwordLabel = document.createElement("label");
-            let accountValue = document.createElement("input");
-            let passwordValue = document.createElement("input");
-            let editBtn = document.createElement("button");
-            let deleteBtn = document.createElement("button");
-            let okBtn =document.createElement("button");
-            let accountText =document.createTextNode('account:');
-            let passwordText =document.createTextNode('password:');
-            card.classList.add("card");
-            card.id=service;
-            serviceName.classList.add("service");
-            serviceName.innerText=service;
-            accountValue.setAttribute("type","text");
-            accountValue.setAttribute("disabled","true");
-            accountValue.value=email;
-            accountLabel.append(accountText,accountValue);
-            passwordValue.setAttribute("type","password");
-            passwordValue.setAttribute("disabled","true");
-            passwordValue.value=password;
-            passwordLabel.append(passwordText,passwordValue);
-            editBtn.innerText='Edit';
-            editBtn.setAttribute("data-type","edit");
-            editBtn.setAttribute("onclick",`editCard(${service})`);
-            deleteBtn.innerText='Delete';
-            deleteBtn.setAttribute("data-type","delete");
-            deleteBtn.setAttribute("onclick",`deleteCard(${service})`);
-            okBtn.innerText='Ok!!';
-            okBtn.setAttribute("data-type","ok");
-            okBtn.setAttribute("onclick",`ok(${service})`);
-            card.append(serviceName,accountLabel,passwordLabel,okBtn,editBtn,deleteBtn);
-            management.append(card);*/
-            addNewCardForm.reset();
-            let dialog = document.querySelector(".add-new-card-modal");
-            dialog.close();
-         return   db.collection("users").doc(user.uid).collection("cards").doc(service).set({
-                service:service,
-                account:email,
-                password:password
-            });
-        })
+        headerText.style.fontSize='60px';      
     }else{
         mapCardsToUI([])
         logout.style.display='none';
