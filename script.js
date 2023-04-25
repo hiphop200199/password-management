@@ -3,7 +3,8 @@ const addNewCardForm = document.getElementById("add-form");
 let dialog = document.querySelector(".sign-up-modal");
 
 
-signInBtn.addEventListener("click",()=>dialog.showModal)
+
+signInBtn.addEventListener("click",()=>dialog.showModal())
 
 
 addNewCardBtn.addEventListener("click",e=>{
@@ -19,7 +20,7 @@ addNewCardForm.addEventListener("submit",e =>{
     const service = addNewCardForm["new-service"].value;
     const email = addNewCardForm["new-account"].value;
     const password = addNewCardForm["new-password"].value;
-    let card = document.createElement("div");
+    /*let card = document.createElement("div");
     let serviceName = document.createElement("h2");
     let accountLabel = document.createElement("label");
     let passwordLabel = document.createElement("label");
@@ -44,15 +45,15 @@ addNewCardForm.addEventListener("submit",e =>{
     passwordLabel.append(passwordText,passwordValue);
     editBtn.innerText='Edit';
     editBtn.setAttribute("data-type","edit");
-    editBtn.onclick=editCard(service);
+    editBtn.setAttribute("onclick",`editCard(${service})`);
     deleteBtn.innerText='Delete';
     deleteBtn.setAttribute("data-type","delete");
-    deleteBtn.onclick=deleteCard(service);
+    deleteBtn.setAttribute("onclick",`deleteCard(${service})`);
     okBtn.innerText='Ok!!';
     okBtn.setAttribute("data-type","ok");
-    okBtn.onclick=ok(service);
+    okBtn.setAttribute("onclick",`ok(${service})`);
     card.append(serviceName,accountLabel,passwordLabel,okBtn,editBtn,deleteBtn);
-    management.append(card);
+    management.append(card);*/
     addNewCardForm.reset();
     let dialog = document.querySelector(".add-new-card-modal");
     dialog.close();
@@ -65,24 +66,29 @@ addNewCardForm.addEventListener("submit",e =>{
 
 
 function ok(cardId){
-    let account = management[`${cardId}`].children[1].children[0];
-    let password = management[`${cardId}`].children[2].children[0];
+    let account = cardId.children[1].children[0];
+    let password = cardId.children[2].children[0];
         account.setAttribute("disabled","true");
         password.setAttribute("disabled","true");
-        this.style.display='none';
-        this.nextElementSibling.style.display='inline';
+        cardId.children[3].style.display='none';
+        cardId.children[4].style.display='inline';
+        db.collection("cards").doc(cardId.id).update({
+            account:account.value,
+            password:password.value
+        })
 }
 function editCard(cardId){
-    let account = management[`${cardId}`].children[1].children[0];
-    let password = management[`${cardId}`].children[2].children[0];
+    let account = cardId.children[1].children[0];
+    let password = cardId.children[2].children[0];
         account.removeAttribute("disabled");
         password.removeAttribute("disabled");
-        this.style.display='none';
-        this.previousElementSibling.style.display='inline';
+        cardId.children[4].style.display='none';
+        cardId.children[3].style.display='inline';
 }
 
 function deleteCard(cardId){
-    management.removeChild(management[`${cardId}`]);
+    //management.removeChild(cardId);
+    db.collection("cards").doc(cardId.id).delete();
 }
 
 function mapCardsToUI(data){
@@ -90,7 +96,7 @@ function mapCardsToUI(data){
         let {service,account,password} = doc.data();
         return(`
         
-        div class="card" id="${doc.id}">
+        <div class="card" id="${doc.id}">
           <h2 class="service">${service}</h2>
           <label>account:<input type="text" disabled value="${account}" /></label>
           <label>password:<input type="password" disabled value="${password}" /></label>

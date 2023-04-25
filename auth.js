@@ -7,14 +7,16 @@ let management = document.querySelector(".management");
 let addNewCardBtn = document.querySelector(".add-new-card");
 let errorMessage= document.querySelector(".error-message");
 
-db.collection("cards").get().then(snapshot =>{
-   mapCardsToUI(snapshot.docs)
-})
+
 
 
 auth.onAuthStateChanged(user =>{
     console.log(user);
     if(user){
+        //用onSnapshot即時監聽資料庫變化
+        db.collection("cards").onSnapshot(snapshot =>{
+            mapCardsToUI(snapshot.docs)
+         })
         let userName =user.email.match(/.+(?=@)/i);
         loginForm.reset();
         loginForm.style.display="none";
@@ -24,6 +26,7 @@ auth.onAuthStateChanged(user =>{
         headerText.innerText=`Welcome ${userName}!`;
         headerText.style.fontSize='60px';
     }else{
+        mapCardsToUI([])
         logout.style.display='none';
         management.style.display='none';
         loginForm.style.display='flex';
