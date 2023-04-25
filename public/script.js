@@ -23,6 +23,7 @@ function editCard(cardId){
     let password = cardId.children[2].children[0];
         account.removeAttribute("disabled");
         password.removeAttribute("disabled");
+        password.setAttribute("type", "text");
         cardId.children[4].style.display='none';
         cardId.children[3].style.display='inline';
 }

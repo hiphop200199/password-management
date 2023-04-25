@@ -19,7 +19,7 @@ auth.onAuthStateChanged(user =>{
             mapCardsToUI(snapshot.docs)
             let okBtns = document.querySelectorAll("[data-type=ok]");
             let deleteBtns = document.querySelectorAll("[data-type=delete]");
-            let addNewCardForm = document.getElementById("add-form");
+            let addNewCardForm = document.getElementById("add-form");  
             for(let i=0;i<okBtns.length;i++){
                 okBtns[i].onclick=function(){
                     let account = okBtns[i].parentElement.children[1].children[0];
@@ -31,6 +31,7 @@ auth.onAuthStateChanged(user =>{
                     
                         account.setAttribute("disabled","true");
                         password.setAttribute("disabled","true");
+                        password.setAttribute("type","password");
                        okBtns[i].style.display='none';
                         okBtns[i].nextElementSibling.style.display='inline';
                 }
