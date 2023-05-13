@@ -1,8 +1,13 @@
 const signInBtn = document.getElementById("sign-btn");
 let dialog = document.querySelector(".sign-up-modal");
+let closeSignUpModalBtn=document.getElementById("close-sign-up-modal");
+let closeAddNewCardModalBtn=document.getElementById("close-add-new-card-modal");
 
-
-
+closeSignUpModalBtn.addEventListener("click",()=>dialog.close());
+closeAddNewCardModalBtn.addEventListener("click",()=>{
+    let dialog = document.querySelector(".add-new-card-modal");
+    dialog.close();
+})
 signInBtn.addEventListener("click",()=>dialog.showModal())
 
 
